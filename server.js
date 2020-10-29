@@ -2,9 +2,16 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const colors = require('colors');
+const dotenv = require('dotenv');
+const morgan = require('morgan');
 const connectToDatabase = require('./config/database');
+
 // Load environment variables
-require('dotenv').config();
+dotenv.config();
+
+// API Routes
+const postRoutes = require('./routes/api/posts');
+const userRoutes = require('./routes/api/users');
 
 // Database connection
 connectToDatabase();
@@ -18,12 +25,17 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Morgan middleware
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
 // Setup static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// API Routes
-app.use('/api/posts', require('./routes/api/posts'));
-app.use('/api/users', require('./routes/api/users'));
+// Routes configuration
+app.use('/api/posts', postRoutes);
+app.use('/api/users', userRoutes);
 
 // Run server on port
 const PORT = process.env.PORT || 5000;

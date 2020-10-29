@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const router = express.Router();
 
 const UserModel = require('../../models/User');
-const User = require('../../models/User');
 
 // @route   GET - /api/users/test
 // @desc    Test route for users
@@ -15,7 +14,7 @@ router.get('/test', (req, res) => {
 // @desc    Fetches all the users
 router.get('/', async (req, res) => {
   try {
-    // Get all user
+    // Get all users
     const users = await UserModel.find({}, { _id: 1, username: 1, name: 1 });
     return res.json(users);
   } catch (err) {
