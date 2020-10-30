@@ -1,4 +1,44 @@
+/* Core styles */
+:root {
+  --dark-color: #333;
+  --light-color: #f3f3f3;
+}
+
 body {
-  background-color: #333;
-  color: #f3f3f3;
+  margin: 0;
+  line-height: 1.6;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--dark-color);
+  background-color: var(--light-color);
+}
+
+/* Utility classes */
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+header.main-header {
+  text-align: center;
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  padding: 1rem 0;
+  margin-bottom: 1.1rem;
+}
+
+header.main-header h4 {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+ul.posts {
+  list-style: none;
+  padding: 0;
+}
+
+ul.posts li {
+  font-size: 1.2rem;
+  margin-bottom: 0.7rem;
+  padding: 0.5rem;
+  border: 1px solid #333;
 }

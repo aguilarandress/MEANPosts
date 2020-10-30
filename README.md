@@ -4,12 +4,18 @@
 
 ## Quick start
 
+### Installation
+
 ```bash
-$ npm install # Install the dependencies
+$ npm install # Install project dependencies
+```
 
-$ npm start # Run server
+### Run server
 
-$ npm run dev # Run development server
+```bash
+$ npm start # Starts server on port 5000
+
+$ npm run dev # Run development server on port 5000
 ```
 
 ## Database setup

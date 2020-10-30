@@ -15,7 +15,7 @@ router.get('/test', (req, res) => {
 router.get('/', async (req, res) => {
   try {
     // Get posts
-    const posts = await PostModel.find();
+    const posts = await PostModel.find().sort({ date: -1 });
     res.json(posts);
   } catch (err) {
     console.error(err);

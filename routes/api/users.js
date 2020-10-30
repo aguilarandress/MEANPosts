@@ -25,6 +25,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+// @route   GET - /api/users/profile/:id
+// @desc    Gets a single user by id
+router.get('/profile/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    // Get user by id
+    const user = await UserModel.findById(id);
+    return res.json(user);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ success: false, message: 'Internal server error...' });
+  }
+});
+
 // @route   POST - /api/users/register
 // @desc    Creates a new user
 router.post('/register', async (req, res) => {
