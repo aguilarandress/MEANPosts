@@ -12,6 +12,7 @@ import { PostsComponent } from './components/posts/posts.component';
 
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { PostService } from './services/post.service';
+import { PostsListComponent } from './components/posts-list/posts-list.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { PostService } from './services/post.service';
     FooterComponent,
     AboutComponent,
     PostsComponent,
+    PostsListComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule],
   providers: [PostService],
