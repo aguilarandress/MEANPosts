@@ -1,6 +1,6 @@
-# Posts and users Node.js API
+# MEAN Posts
 
-> Simple API for CRUD operations with posts and users
+> Small MEAN Stack web application with CRUD operations for posts
 
 ## Quick start
 
