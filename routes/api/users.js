@@ -44,11 +44,11 @@ router.get('/profile/:id', async (req, res) => {
 // @route   POST - /api/users/register
 // @desc    Creates a new user
 router.post('/register', async (req, res) => {
-  const { username, password, name } = req.body;
+  const { code, name, password } = req.body;
   try {
     // Check for user with username
-    const userWithUsername = UserModel.find({ username });
-    if (userWithUsername == null) {
+    const userWithCode = UserModel.find({ code });
+    if (userWithCode == null) {
       return res.status(400).json({ error: 'Username already exists...' });
     }
     // Hash password
@@ -56,7 +56,7 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
     // Create user
     const newUser = new UserModel({
-      username,
+      code,
       name,
       password: hashedPassword,
     });
