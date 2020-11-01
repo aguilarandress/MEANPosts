@@ -2,5 +2,7 @@
   <h4>{{ post.title }}</h4>
   <p><strong>Author: </strong> {{ post.user }}</p>
   <p><strong>Publish date: </strong> {{ post.date }}</p>
-  <a href="#" class="btn btn-primary btn-block">Read More</a>
+  <a routerLink="/posts/{{ post._id }}" class="btn btn-primary btn-block"
+    >Read More</a
+  >
 </div>

@@ -18,4 +18,13 @@ export class PostService {
   public getPosts(): Observable<Post[]> {
     return this.httpClient.get<Post[]>(`${environment.apiUrl}/posts`);
   }
+
+  /**
+   * Gets a post by id
+   * @param id Post id
+   * @returns A post with the id
+   */
+  public getPostById(id: string): Observable<Post> {
+    return this.httpClient.get<Post>(`${environment.apiUrl}/posts/${id}`);
+  }
 }
