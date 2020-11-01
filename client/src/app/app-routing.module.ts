@@ -5,11 +5,13 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostComponent } from './components/post/post.component';
+import { AddPostComponent } from './components/add-post/add-post.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
   { path: 'posts', component: PostsComponent },
+  { path: 'posts/add', component: AddPostComponent, pathMatch: 'full' },
   { path: 'posts/:id', component: PostComponent },
 ];
 

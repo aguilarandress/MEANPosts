@@ -10,7 +10,7 @@ import Post from '../../models/Post';
   styleUrls: ['./post.component.css'],
 })
 export class PostComponent implements OnInit {
-  private post: Post = {
+  public post: Post = {
     _id: '',
     title: '',
     description: '',

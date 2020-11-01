@@ -1,0 +1,42 @@
+<h3>Add a new post</h3>
+<form (ngSubmit)="onSubmit()" #postForm="ngForm">
+  <div class="form-group">
+    <label for="title">Post title:</label>
+    <input
+      type="text"
+      name="title"
+      id="title"
+      [(ngModel)]="post.title"
+      #title="ngModel"
+      placeholder="Post title..."
+      class="form-control"
+    />
+  </div>
+  <div class="form-group">
+    <label for="user">Post author:</label>
+    <input
+      type="text"
+      class="form-control"
+      name="user"
+      [(ngModel)]="post.user"
+      #user="ngModel"
+      placeholder="User1..."
+      id="user"
+    />
+  </div>
+  <div class="form-group">
+    <label for="description">Post Body:</label>
+    <textarea
+      name="description"
+      id="description"
+      cols="30"
+      rows="10"
+      [(ngModel)]="post.description"
+      #description="ngModel"
+      class="form-control"
+    ></textarea>
+  </div>
+  <button type="submit" class="btn btn-success btn-block mb-4">
+    Create post
+  </button>
+</form>

@@ -27,4 +27,17 @@ export class PostService {
   public getPostById(id: string): Observable<Post> {
     return this.httpClient.get<Post>(`${environment.apiUrl}/posts/${id}`);
   }
+
+  /**
+   * Creates a new post
+   * @param post Post to create
+   * @returns The new created post
+   */
+  public addPost(post: Post): Observable<Post> {
+    return this.httpClient.post<Post>(`${environment.apiUrl}/posts`, post, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }
 }
