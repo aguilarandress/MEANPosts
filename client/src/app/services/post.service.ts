@@ -40,4 +40,21 @@ export class PostService {
       },
     });
   }
+
+  public editPost(post: Post): Observable<Post> {
+    const { _id } = post;
+    return this.httpClient.patch<Post>(
+      `${environment.apiUrl}/posts/${_id}`,
+      post,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
+
+  public deletePost(id: string): Observable<any> {
+    return this.httpClient.delete<any>(`${environment.apiUrl}/posts/${id}`);
+  }
 }
