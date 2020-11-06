@@ -12,6 +12,7 @@ dotenv.config();
 // API Routes
 const postRoutes = require('./routes/api/posts');
 const userRoutes = require('./routes/api/users');
+const authRoutes = require('./routes/api/auth');
 
 // Database connection
 connectToDatabase();
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes configuration
 app.use('/api/posts', postRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 // Run server on port
 const PORT = process.env.PORT || 5000;
