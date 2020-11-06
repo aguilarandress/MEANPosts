@@ -1,6 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const isAuthenticated = require('../../middleware/isAuthenticated');
 const router = express.Router();
 
 const UserModel = require('../../models/User');
@@ -44,6 +45,10 @@ router.post('/', async (req, res) => {
     console.log(err);
     res.status(500).json({ msg: 'Internal server error...' });
   }
+});
+
+router.get('/profile', isAuthenticated, async (req, res) => {
+  res.json(req.user);
 });
 
 module.exports = router;

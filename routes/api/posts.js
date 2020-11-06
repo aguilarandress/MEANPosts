@@ -1,4 +1,5 @@
 const express = require('express');
+const isAuthenticated = require('../../middleware/isAuthenticated');
 const router = express.Router();
 
 /**
@@ -48,7 +49,7 @@ router.get('/:id', async (req, res) => {
 
 // @route   POST - /api/posts/
 // @desc    Creates a new post
-router.post('/', async (req, res) => {
+router.post('/', isAuthenticated, async (req, res) => {
   const { title, description, user } = req.body;
   try {
     const userWithName = await UserModel.findOne({ name: user });
@@ -81,7 +82,7 @@ router.post('/', async (req, res) => {
 
 // @route   DELETE - /api/posts/:id
 // @desc    Deletes a single post by id
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', isAuthenticated, async (req, res) => {
   const { id } = req.params;
   try {
     await PostModel.deleteOne({ _id: id });
@@ -96,7 +97,7 @@ router.delete('/:id', async (req, res) => {
 
 // @route   PATCH - /api/posts/:id
 // @desc    Updates a single post
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', isAuthenticated, async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description } = req.body;
