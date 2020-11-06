@@ -15,7 +15,7 @@ router.get('/test', (req, res) => {
 router.get('/', async (req, res) => {
   try {
     // Get all users
-    const users = await UserModel.find({}, { _id: 1, username: 1, name: 1 });
+    const users = await UserModel.find({}, { _id: 1, code: 1, name: 1 });
     return res.json(users);
   } catch (err) {
     console.error(err);

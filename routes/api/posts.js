@@ -1,6 +1,10 @@
 const express = require('express');
-const colors = require('colors');
 const router = express.Router();
+
+/**
+ * Quiz NodeJS / Bases de datos 2
+ * Andres Esteban Aguilar Moya 2019156214
+ */
 
 const PostModel = require('../../models/Post');
 const UserModel = require('../../models/User');
@@ -47,9 +51,9 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   const { title, description, user } = req.body;
   try {
-    const userWithCode = await UserModel.find({ code: user });
+    const userWithName = await UserModel.findOne({ name: user });
     // Check for user
-    if (userWithCode.length == 0) {
+    if (!userWithName) {
       // Create user
       const newUser = new UserModel({
         code: user,

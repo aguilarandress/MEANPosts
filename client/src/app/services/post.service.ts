@@ -41,6 +41,11 @@ export class PostService {
     });
   }
 
+  /**
+   * Edits a single post
+   * @param post New post data
+   * @returns Updated post
+   */
   public editPost(post: Post): Observable<Post> {
     const { _id } = post;
     return this.httpClient.patch<Post>(
@@ -54,6 +59,11 @@ export class PostService {
     );
   }
 
+  /**
+   * Deletes a post
+   * @param id Post id
+   * @returns Success object
+   */
   public deletePost(id: string): Observable<any> {
     return this.httpClient.delete<any>(`${environment.apiUrl}/posts/${id}`);
   }
