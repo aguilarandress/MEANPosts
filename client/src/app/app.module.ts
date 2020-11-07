@@ -13,10 +13,14 @@ import { AboutComponent } from './components/about/about.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostsListComponent } from './components/posts-list/posts-list.component';
 import { PostComponent } from './components/post/post.component';
-
-import { PostService } from './services/post.service';
 import { AddPostComponent } from './components/add-post/add-post.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+
+import { PostService } from './services/post.service';
+import { UsersService } from './services/users.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,8 @@ import { EditPostComponent } from './components/edit-post/edit-post.component';
     PostComponent,
     AddPostComponent,
     EditPostComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,7 @@ import { EditPostComponent } from './components/edit-post/edit-post.component';
     FormsModule,
     FlashMessagesModule.forRoot(),
   ],
-  providers: [PostService],
+  providers: [PostService, AuthService, UsersService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
