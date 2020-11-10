@@ -40,6 +40,9 @@
           <a routerLink="/posts/add" class="nav-link">Add post</a>
         </li>
         <li *ngIf="this.authService.isAuthenticated()" class="nav-item">
+          <a routerLink="profile" class="nav-link">Profile</a>
+        </li>
+        <li *ngIf="this.authService.isAuthenticated()" class="nav-item">
           <a (click)="onLogoutClick()" href="#" class="nav-link">Logout</a>
         </li>
       </ul>

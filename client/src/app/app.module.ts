@@ -22,6 +22,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { PostService } from './services/post.service';
 import { UsersService } from './services/users.service';
 import { AuthService } from './services/auth.service';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AuthService } from './services/auth.service';
     EditPostComponent,
     RegisterComponent,
     LoginComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
