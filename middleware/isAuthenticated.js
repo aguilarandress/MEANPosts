@@ -1,6 +1,12 @@
 const colors = require('colors');
 const jwt = require('jsonwebtoken');
 
+/**
+ * Verifies if the token is valid and the user is authenticated
+ * @param {Request} req Request Object
+ * @param {Response} res Response object
+ * @param {Function} next Next piece of middleware
+ */
 async function isAuthenticated(req, res, next) {
   // Get token from header
   const token = req.header('x-auth-token');

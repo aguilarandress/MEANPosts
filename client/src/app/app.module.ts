@@ -18,6 +18,7 @@ import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 
+import { AuthGuard } from './guards/auth.guard';
 import { PostService } from './services/post.service';
 import { UsersService } from './services/users.service';
 import { AuthService } from './services/auth.service';
@@ -44,7 +45,7 @@ import { AuthService } from './services/auth.service';
     FormsModule,
     FlashMessagesModule.forRoot(),
   ],
-  providers: [PostService, AuthService, UsersService],
+  providers: [PostService, AuthService, UsersService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

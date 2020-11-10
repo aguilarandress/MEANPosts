@@ -10,15 +10,27 @@ import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
   { path: 'posts', component: PostsComponent },
-  { path: 'posts/add', component: AddPostComponent, pathMatch: 'full' },
+  {
+    path: 'posts/add',
+    component: AddPostComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+  },
   { path: 'posts/:id', component: PostComponent },
-  { path: 'posts/:id/edit', component: EditPostComponent, pathMatch: 'full' },
+  {
+    path: 'posts/:id/edit',
+    component: EditPostComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
