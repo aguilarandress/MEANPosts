@@ -2,26 +2,22 @@ const express = require('express');
 const isAuthenticated = require('../../middleware/isAuthenticated');
 const router = express.Router();
 
-/**
- * Quiz NodeJS / Bases de datos 2
- * Andres Esteban Aguilar Moya 2019156214
- */
-
 const PostModel = require('../../models/Post');
-const UserModel = require('../../models/User');
 
 // @route   GET - /api/posts/test
 // @desc    Test route for posts API
+// @access  public
 router.get('/test', (req, res) => {
   res.json({ message: 'Posts test route' });
 });
 
 // @route   GET - /api/posts/
 // @desc    Fetches all the posts
+// @access  public
 router.get('/', async (req, res) => {
   try {
     // Get posts
-    const posts = await PostModel.find().sort({ date: -1 });
+    const posts = await PostModel.find().populate('user').sort({ date: -1 });
     res.json(posts);
   } catch (err) {
     console.error(err);
@@ -33,6 +29,7 @@ router.get('/', async (req, res) => {
 
 // @route   GET - /api/posts/:id
 // @desc    Fetches a single post
+// @access  public
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -49,25 +46,16 @@ router.get('/:id', async (req, res) => {
 
 // @route   POST - /api/posts/
 // @desc    Creates a new post
+// @access  private
 router.post('/', isAuthenticated, async (req, res) => {
-  const { title, description, user } = req.body;
   try {
-    const userWithName = await UserModel.findOne({ name: user });
-    // Check for user
-    if (!userWithName) {
-      // Create user
-      const newUser = new UserModel({
-        code: user,
-        name: user,
-        password: '1234',
-      });
-      await newUser.save();
-    }
-    // Create new post
+    // Get post and user information
+    const { title, description } = req.body;
+    const { _id } = req.user;
     const newPost = new PostModel({
       title,
       description,
-      user,
+      user: _id,
     });
     // Save post
     const savedPost = await newPost.save();
@@ -82,6 +70,7 @@ router.post('/', isAuthenticated, async (req, res) => {
 
 // @route   DELETE - /api/posts/:id
 // @desc    Deletes a single post by id
+// @access  private
 router.delete('/:id', isAuthenticated, async (req, res) => {
   const { id } = req.params;
   try {
@@ -97,6 +86,7 @@ router.delete('/:id', isAuthenticated, async (req, res) => {
 
 // @route   PATCH - /api/posts/:id
 // @desc    Updates a single post
+// @access  private
 router.patch('/:id', isAuthenticated, async (req, res) => {
   try {
     const { id } = req.params;

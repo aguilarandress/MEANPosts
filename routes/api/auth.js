@@ -13,11 +13,14 @@ router.get('/test', (req, res) => {
   res.json({ msg: 'Authentication API works!!' });
 });
 
+// @route   POST - /api/auth
+// @desc    Authenticate user and get token
+// @access  public
 router.post('/', async (req, res) => {
-  const { name, password } = req.body;
+  const { username, password } = req.body;
   try {
     // Check for user
-    const userWithName = await UserModel.findOne({ name });
+    const userWithName = await UserModel.findOne({ username });
     if (!userWithName) {
       return res.status(404).json({ msg: 'Invalid credentials' });
     }
@@ -33,21 +36,30 @@ router.post('/', async (req, res) => {
     const payload = {
       user: {
         _id: userWithName._id,
-        name: userWithName.name,
-        code: userWithName.code,
+        username: userWithName.username,
+        email: userWithName.email,
       },
     };
-    jwt.sign(payload, 'mysecretkey', { expiresIn: '5 days' }, (err, token) => {
-      if (err) throw err;
-      res.json({ token });
-    });
+    // Sign token and send
+    jwt.sign(
+      payload,
+      process.env.SECRET_KEY,
+      { expiresIn: '5 days' },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: 'Internal server error...' });
   }
 });
 
-router.get('/profile', isAuthenticated, async (req, res) => {
+// @route   GET - /api/auth/me
+// @desc    Get current user information
+// @access  public
+router.get('/me', isAuthenticated, async (req, res) => {
   res.json(req.user);
 });
 

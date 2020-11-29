@@ -16,7 +16,7 @@ async function isAuthenticated(req, res, next) {
   }
   try {
     // Check valid token
-    jwt.verify(token, 'mysecretkey', (error, decoded) => {
+    jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
       if (error) {
         return res.status(401).json({ msg: 'Token not valid' });
       }
