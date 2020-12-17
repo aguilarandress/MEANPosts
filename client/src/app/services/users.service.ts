@@ -11,6 +11,10 @@ import User from '../models/User';
 export class UsersService {
   constructor(private httpClient: HttpClient) {}
 
+  /**
+   * Registers a new user
+   * @param user The user to register
+   */
   public registerUser(user: User): Observable<any> {
     return this.httpClient.post<any>(
       `${environment.apiUrl}/users/register`,

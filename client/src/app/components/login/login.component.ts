@@ -13,8 +13,8 @@ import User from '../../models/User';
 export class LoginComponent implements OnInit {
   public user: User = {
     _id: '',
-    code: '',
-    name: '',
+    email: '',
+    username: '',
     password: '',
   };
 
@@ -27,13 +27,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   public onSubmit(): void {
-    // Validate input data
-    if (this.user.name === '' || this.user.password === '') {
-      this.flashMessageService.show('Please enter your credentials', {
-        cssClass: 'alert alert-danger',
-      });
-      return;
-    }
     // Login request
     this.authService.authenticateUser(this.user).subscribe(
       (response: any) => {

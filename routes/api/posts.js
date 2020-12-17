@@ -1,4 +1,5 @@
 const express = require('express');
+const { body, validationResult } = require('express-validator');
 const isAuthenticated = require('../../middleware/isAuthenticated');
 const router = express.Router();
 
@@ -47,26 +48,42 @@ router.get('/:id', async (req, res) => {
 // @route   POST - /api/posts/
 // @desc    Creates a new post
 // @access  private
-router.post('/', isAuthenticated, async (req, res) => {
-  try {
-    // Get post and user information
-    const { title, description } = req.body;
-    const { _id } = req.user;
-    const newPost = new PostModel({
-      title,
-      description,
-      user: _id,
-    });
-    // Save post
-    const savedPost = await newPost.save();
-    res.json(savedPost);
-  } catch (err) {
-    console.error(err);
-    res
-      .status(500)
-      .json({ success: false, message: 'Internal server error...' });
+router.post(
+  '/',
+  [
+    body('title').isString().withMessage('Please enter a title for your post'),
+    body('description')
+      .isString()
+      .withMessage('Please enter a description for you post'),
+  ],
+  isAuthenticated,
+  async (req, res) => {
+    // Get errors
+    const errors = validationResult(req);
+    // Check for errors
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    try {
+      // Get post and user information
+      const { title, description } = req.body;
+      const { user } = req;
+      const newPost = new PostModel({
+        title,
+        description,
+        user: user._id,
+      });
+      // Save post
+      const savedPost = await newPost.save();
+      res.json(savedPost);
+    } catch (err) {
+      console.error(err);
+      res
+        .status(500)
+        .json({ success: false, message: 'Internal server error...' });
+    }
   }
-});
+);
 
 // @route   DELETE - /api/posts/:id
 // @desc    Deletes a single post by id
@@ -84,27 +101,43 @@ router.delete('/:id', isAuthenticated, async (req, res) => {
   }
 });
 
-// @route   PATCH - /api/posts/:id
+// @route   PUT - /api/posts/:id
 // @desc    Updates a single post
 // @access  private
-router.patch('/:id', isAuthenticated, async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { title, description } = req.body;
-    // Find post by id
-    const updatedPost = await PostModel.findById(id);
-    // Set attributes
-    updatedPost.title = title;
-    updatedPost.description = description;
-    // Save post
-    await updatedPost.save();
-    return res.json(updatedPost);
-  } catch (err) {
-    console.error(err);
-    res
-      .status(500)
-      .json({ success: false, message: 'Internal server error...' });
+router.put(
+  '/:id',
+  [
+    body('title').isString().withMessage('Please enter a title for your post'),
+    body('description')
+      .isString()
+      .withMessage('Please enter a description for your post'),
+  ],
+  isAuthenticated,
+  async (req, res) => {
+    // Get errors
+    const errors = validationResult(req);
+    // Check for errors
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    try {
+      const { id } = req.params;
+      const { title, description } = req.body;
+      // Find post by id
+      const updatedPost = await PostModel.findById(id);
+      // Set attributes
+      updatedPost.title = title;
+      updatedPost.description = description;
+      // Save post
+      await updatedPost.save();
+      return res.json(updatedPost);
+    } catch (err) {
+      console.error(err);
+      res
+        .status(500)
+        .json({ success: false, message: 'Internal server error...' });
+    }
   }
-});
+);
 
 module.exports = router;

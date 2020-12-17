@@ -1,6 +1,6 @@
 export default interface User {
   _id: string;
-  code?: string;
-  name: string;
+  email?: string;
+  username?: string;
   password?: string;
 }

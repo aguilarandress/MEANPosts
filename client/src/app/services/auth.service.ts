@@ -19,8 +19,8 @@ export class AuthService {
     this.isLoggedIn = false;
     this.currentUser = {
       _id: '',
-      code: '',
-      name: '',
+      email: '',
+      username: '',
       password: '',
     };
     this.token = null;
@@ -66,8 +66,8 @@ export class AuthService {
     this.isLoggedIn = false;
     this.currentUser = {
       _id: '',
-      code: '',
-      name: '',
+      email: '',
+      username: '',
       password: '',
     };
     localStorage.removeItem('auth_token');

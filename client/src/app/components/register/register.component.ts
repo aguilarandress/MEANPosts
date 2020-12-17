@@ -12,6 +12,7 @@ import User from '../../models/User';
 })
 export class RegisterComponent implements OnInit {
   public user: User;
+  public passwordConfirmation: string;
 
   constructor(
     private userService: UsersService,
@@ -20,8 +21,8 @@ export class RegisterComponent implements OnInit {
   ) {
     this.user = {
       _id: '',
-      name: '',
-      code: '',
+      username: '',
+      email: '',
       password: '',
     };
   }
@@ -29,25 +30,28 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   public onSubmit(): void {
-    const { name, password } = this.user;
-    // Check complete form
-    if (name == '' || password.length < 6) {
-      this.flashMessageService.show('Please fill in the form correctly', {
-        cssClass: 'alert alert-danger',
-      });
+    // Check password confirmation
+    if (this.passwordConfirmation !== this.user.password) {
+      this.flashMessageService.show(
+        'Make sure both passwords are the same...',
+        { cssClass: 'alert alert-danger' }
+      );
       return;
     }
-    this.user.code = name;
+    // Register new user
     this.userService.registerUser(this.user).subscribe(
       () => {
-        this.flashMessageService.show('User registered', {
+        this.flashMessageService.show("You're now registered", {
           cssClass: 'alert alert-success',
         });
         this.routerService.navigate(['/login']);
       },
       (err) => {
-        this.flashMessageService.show(err.error.error, {
-          cssClass: 'alert alert-danger',
+        const { errors } = err.error;
+        errors.forEach((errorMessage: any) => {
+          this.flashMessageService.show(errorMessage.msg, {
+            cssClass: 'alert alert-danger',
+          });
         });
       }
     );
