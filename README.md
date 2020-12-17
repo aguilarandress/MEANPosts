@@ -6,7 +6,7 @@
 
 ### Installation
 
-Run this command in the `/client` directory and the root directory.
+Run this command in the `/client` directory and in the root directory.
 
 ```bash
 $ npm install # Install project dependencies
@@ -31,3 +31,13 @@ Change the connection string in the `.env` file
 ## Environment setup
 
 Make sure to setup the `NODE_ENV` environment variable in the `.env` file for development.
+
+## Application info
+
+### Version
+
+1.0.0
+
+### Author
+
+Andres Aguilar Moya
