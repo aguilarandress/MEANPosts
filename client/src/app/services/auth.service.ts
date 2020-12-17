@@ -27,6 +27,10 @@ export class AuthService {
     this.jwtHelper = new JwtHelperService();
   }
 
+  /**
+   * Authenticates a user
+   * @param user User to authenticate
+   */
   public authenticateUser(user: User): Observable<any> {
     return this.httpClient.post<any>(`${environment.apiUrl}/auth`, user, {
       headers: {
@@ -35,6 +39,10 @@ export class AuthService {
     });
   }
 
+  /**
+   * Saves token for authentication
+   * @param token The token for authentication
+   */
   public setAuthenticationToken(token: string): void {
     this.token = token;
     localStorage.setItem('auth_token', token);
@@ -42,6 +50,9 @@ export class AuthService {
     this.isLoggedIn = true;
   }
 
+  /**
+   * Gets authentication token from local storage
+   */
   public loadAuthenticationToken(): void {
     // Check for token
     const token: string = localStorage.getItem('auth_token');
@@ -53,14 +64,23 @@ export class AuthService {
     }
   }
 
+  /**
+   * Gets the current logged in user
+   */
   public getCurrentUser(): User {
     return this.currentUser;
   }
 
+  /**
+   * Checks if user is authenticated
+   */
   public isAuthenticated(): boolean {
     return this.isLoggedIn;
   }
 
+  /**
+   * Logs out a user
+   */
   public logout(): void {
     this.token = '';
     this.isLoggedIn = false;

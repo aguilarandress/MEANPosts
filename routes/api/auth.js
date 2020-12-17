@@ -35,7 +35,9 @@ router.post(
       // Check for user
       const userWithName = await UserModel.findOne({ username });
       if (!userWithName) {
-        return res.status(404).json({ msg: 'Invalid credentials' });
+        return res
+          .status(404)
+          .json({ errors: [{ msg: 'Invalid credentials' }] });
       }
       // Check for password
       const passwordMatches = await bcrypt.compare(
@@ -43,7 +45,9 @@ router.post(
         userWithName.password
       );
       if (!passwordMatches) {
-        return res.status(400).json({ msg: 'Invalid credentials' });
+        return res
+          .status(404)
+          .json({ errors: [{ msg: 'Invalid credentials' }] });
       }
       // Create token
       const payload = {

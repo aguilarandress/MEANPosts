@@ -15,23 +15,29 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/">Home</a>
+          <a class="nav-link" routerLink="/"><i class="fa fa-home"></i> Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/about">About</a>
+          <a class="nav-link" routerLink="/about"
+            ><i class="fa fa-book"></i> About</a
+          >
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li *ngIf="this.authService.isAuthenticated()" class="nav-item">
           <a href="#" class="nav-link"
-            >Welcome {{ this.authService.getCurrentUser().name }}!</a
+            >Welcome {{ this.authService.getCurrentUser().username }}!</a
           >
         </li>
         <li *ngIf="!this.authService.isAuthenticated()" class="nav-item">
-          <a routerLink="/register" class="nav-link">Register</a>
+          <a routerLink="/register" class="nav-link"
+            ><i class="fas fa-user-plus"></i> Register</a
+          >
         </li>
         <li *ngIf="!this.authService.isAuthenticated()" class="nav-item">
-          <a routerLink="/login" class="nav-link">Login</a>
+          <a routerLink="/login" class="nav-link"
+            ><i class="fa fa-sign-in-alt"></i> Login</a
+          >
         </li>
         <li class="nav-item">
           <a routerLink="/posts" class="nav-link">Latest posts</a>

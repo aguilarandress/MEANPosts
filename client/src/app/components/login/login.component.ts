@@ -31,13 +31,19 @@ export class LoginComponent implements OnInit {
     this.authService.authenticateUser(this.user).subscribe(
       (response: any) => {
         const { token } = response;
+        // Save token to ls
         this.authService.setAuthenticationToken(token);
+        this.flashMessageService.show("You're now logged in", {
+          cssClass: 'alert alert-success',
+        });
         this.routerService.navigateByUrl('/posts');
       },
       (err) => {
-        const { error } = err;
-        this.flashMessageService.show(error.msg, {
-          cssClass: 'alert alert-danger',
+        const { errors } = err.error;
+        errors.forEach((errorMessage: any) => {
+          this.flashMessageService.show(errorMessage.msg, {
+            cssClass: 'alert alert-danger',
+          });
         });
       }
     );
