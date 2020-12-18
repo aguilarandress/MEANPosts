@@ -1,6 +1,6 @@
 <div *ngFor="let post of posts" class="card card-body mb-3">
   <h4>{{ post.title }}</h4>
-  <p><strong>Author: </strong> {{ post.user }}</p>
+  <p><strong>Author: </strong> {{ post.user.username }}</p>
   <p><strong>Publish date: </strong> {{ post.date | date }}</p>
   <a routerLink="/posts/{{ post._id }}" class="btn btn-primary btn-block"
     >Read More</a

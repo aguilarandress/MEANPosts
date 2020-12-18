@@ -14,8 +14,12 @@ export class PostComponent implements OnInit {
   public post: Post = {
     _id: '',
     title: '',
-    description: '',
+    body: '',
     date: '',
+    user: {
+      _id: '',
+      username: '',
+    },
   };
 
   constructor(

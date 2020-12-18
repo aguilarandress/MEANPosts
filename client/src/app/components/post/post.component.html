@@ -1,4 +1,4 @@
 <h3>{{ post.title }}</h3>
-<p>Created by: {{ post.user }}</p>
+<p>Created by: {{ post.user.username }}</p>
 <p>Publish date: {{ post.date | date }}</p>
-<p>{{ post.description }}</p>
+<p>{{ post.body }}</p>

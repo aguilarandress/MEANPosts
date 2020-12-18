@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
 import Post from '../models/Post';
 
@@ -9,7 +10,10 @@ import Post from '../models/Post';
   providedIn: 'root',
 })
 export class PostService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private authService: AuthService
+  ) {}
 
   /**
    * Gets all the latest posts
@@ -37,6 +41,7 @@ export class PostService {
     return this.httpClient.post<Post>(`${environment.apiUrl}/posts`, post, {
       headers: {
         'Content-Type': 'application/json',
+        'x-auth-token': this.authService.getToken(),
       },
     });
   }

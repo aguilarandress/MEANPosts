@@ -1,8 +1,10 @@
+import User from './User';
+
 interface Post {
   _id: string;
   title?: string;
-  description?: string;
-  user?: string;
+  body?: string;
+  user?: User;
   date?: string;
 }
 

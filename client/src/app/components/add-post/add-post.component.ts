@@ -14,33 +14,35 @@ export class AddPostComponent implements OnInit {
   public post: Post = {
     _id: '',
     title: '',
-    description: '',
-    user: '',
+    body: '',
   };
 
   constructor(
     private flashMessageService: FlashMessagesService,
     private postService: PostService,
+
     private routerService: Router
   ) {}
 
   ngOnInit(): void {}
 
   onSubmit(): void {
-    const { title, description, user } = this.post;
-    // Check for fields
-    if (title == '' || description == '' || user == '') {
-      this.flashMessageService.show('Please fill in the form correctly...', {
-        cssClass: 'alert alert-danger',
-      });
-      return;
-    }
     // Add post
-    this.postService.addPost(this.post).subscribe((post: Post) => {
-      this.flashMessageService.show('Post added...', {
-        cssClass: 'alert alert-success',
-      });
-      this.routerService.navigateByUrl('/posts');
-    });
+    this.postService.addPost(this.post).subscribe(
+      (post: Post) => {
+        this.flashMessageService.show('Post created successfuly', {
+          cssClass: 'alert alert-success',
+        });
+        this.routerService.navigateByUrl('/posts');
+      },
+      (err) => {
+        const { errors } = err.error;
+        errors.forEach((errorMessage: any) => {
+          this.flashMessageService.show(errorMessage.msg, {
+            cssClass: 'alert alert-danger',
+          });
+        });
+      }
+    );
   }
 }

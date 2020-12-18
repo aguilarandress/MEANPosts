@@ -71,6 +71,10 @@ export class AuthService {
     return this.currentUser;
   }
 
+  public getToken(): string {
+    return this.token;
+  }
+
   /**
    * Checks if user is authenticated
    */

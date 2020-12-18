@@ -14,8 +14,7 @@ export class EditPostComponent implements OnInit {
   public post: Post = {
     _id: '',
     title: '',
-    description: '',
-    user: '',
+    body: '',
   };
 
   constructor(
@@ -35,17 +34,9 @@ export class EditPostComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    const { title, description, user } = this.post;
-    // Check for fields
-    if (title == '' || description == '' || user == '') {
-      this.flashMessageService.show('Please fill in the form correctly...', {
-        cssClass: 'alert alert-danger',
-      });
-      return;
-    }
     // Edit post
     this.postService.editPost(this.post).subscribe((post: Post) => {
-      this.flashMessageService.show('Post editted...', {
+      this.flashMessageService.show('Post editted successfuly', {
         cssClass: 'alert alert-success',
       });
       this.routerService.navigateByUrl('/posts');

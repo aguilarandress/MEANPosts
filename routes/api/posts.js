@@ -35,7 +35,7 @@ router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     // Find post by id
-    const post = await PostModel.findById(id);
+    const post = await PostModel.findById(id).populate('user');
     return res.json(post);
   } catch (err) {
     console.error(err);
@@ -52,7 +52,7 @@ router.post(
   '/',
   [
     body('title').isString().withMessage('Please enter a title for your post'),
-    body('description')
+    body('body')
       .isString()
       .withMessage('Please enter a description for you post'),
   ],
@@ -66,11 +66,11 @@ router.post(
     }
     try {
       // Get post and user information
-      const { title, description } = req.body;
+      const { title, body } = req.body;
       const { user } = req;
       const newPost = new PostModel({
         title,
-        description,
+        body,
         user: user._id,
       });
       // Save post
@@ -108,7 +108,7 @@ router.put(
   '/:id',
   [
     body('title').isString().withMessage('Please enter a title for your post'),
-    body('description')
+    body('body')
       .isString()
       .withMessage('Please enter a description for your post'),
   ],
@@ -122,12 +122,12 @@ router.put(
     }
     try {
       const { id } = req.params;
-      const { title, description } = req.body;
+      const { title, body } = req.body;
       // Find post by id
       const updatedPost = await PostModel.findById(id);
       // Set attributes
       updatedPost.title = title;
-      updatedPost.description = description;
+      updatedPost.body = body;
       // Save post
       await updatedPost.save();
       return res.json(updatedPost);
