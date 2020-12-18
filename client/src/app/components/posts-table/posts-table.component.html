@@ -1,0 +1,31 @@
+<table class="table table-striped">
+  <thead>
+    <th>Title</th>
+    <th>Date</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of posts">
+      <td>
+        {{ post.title }}
+      </td>
+      <td>
+        {{ post.date | date }}
+      </td>
+      <td>
+        <a routerLink="/posts/{{ post._id }}/edit"
+          ><i class="fa fa-pen"></i> Edit post</a
+        >
+      </td>
+      <td>
+        <button
+          (click)="onDeleteClick(post._id)"
+          class="btn btn-block btn-danger"
+        >
+          <i class="fa fa-times-circle"></i> Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

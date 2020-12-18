@@ -25,8 +25,9 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li *ngIf="this.authService.isAuthenticated()" class="nav-item">
-          <a href="#" class="nav-link"
-            >Welcome {{ this.authService.getCurrentUser().username }}!</a
+          <a routerLink="/profile" class="nav-link"
+            ><i class="fa fa-user"></i> Welcome
+            {{ this.authService.getCurrentUser().username }} (PROFILE)</a
           >
         </li>
         <li *ngIf="!this.authService.isAuthenticated()" class="nav-item">
@@ -40,13 +41,14 @@
           >
         </li>
         <li class="nav-item">
-          <a routerLink="/posts" class="nav-link">Latest posts</a>
+          <a routerLink="/posts" class="nav-link"
+            ><i class="fa fa-newspaper"></i> Latest posts</a
+          >
         </li>
         <li *ngIf="this.authService.isAuthenticated()" class="nav-item">
-          <a routerLink="/posts/add" class="nav-link">Add post</a>
-        </li>
-        <li *ngIf="this.authService.isAuthenticated()" class="nav-item">
-          <a routerLink="profile" class="nav-link">Profile</a>
+          <a routerLink="/dashboard" class="nav-link"
+            ><i class="fa fa-cog"></i> Dashboard</a
+          >
         </li>
         <li *ngIf="this.authService.isAuthenticated()" class="nav-item">
           <a (click)="onLogoutClick()" href="#" class="nav-link">Logout</a>

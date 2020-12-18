@@ -24,8 +24,6 @@ export class PostComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private routerService: Router,
-    private flashMessageService: FlashMessagesService,
     private postService: PostService
   ) {}
 
@@ -36,19 +34,5 @@ export class PostComponent implements OnInit {
         this.post = post;
       });
     });
-  }
-
-  public onDeleteClick(): void {
-    // Wait for confirmation
-    if (confirm('Are you sure?')) {
-      const { _id } = this.post;
-      // Delete post
-      this.postService.deletePost(_id).subscribe(() => {
-        this.flashMessageService.show('Post removed...', {
-          cssClass: 'alert alert-success',
-        });
-        this.routerService.navigateByUrl('/posts');
-      });
-    }
   }
 }

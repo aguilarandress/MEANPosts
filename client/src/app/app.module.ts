@@ -17,12 +17,14 @@ import { AddPostComponent } from './components/add-post/add-post.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import { AuthGuard } from './guards/auth.guard';
 import { PostService } from './services/post.service';
 import { UsersService } from './services/users.service';
 import { AuthService } from './services/auth.service';
-import { ProfileComponent } from './components/profile/profile.component';
+import { PostsTableComponent } from './components/posts-table/posts-table.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
+    DashboardComponent,
+    PostsTableComponent,
   ],
   imports: [
     BrowserModule,

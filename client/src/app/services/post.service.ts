@@ -24,6 +24,21 @@ export class PostService {
   }
 
   /**
+   * Gets the posts created by a user
+   * @param userId The id of the user
+   */
+  public getUserPosts(userId: string): Observable<Post[]> {
+    return this.httpClient.get<Post[]>(
+      `${environment.apiUrl}/posts/user/${userId}`,
+      {
+        headers: {
+          'x-auth-token': this.authService.getToken(),
+        },
+      }
+    );
+  }
+
+  /**
    * Gets a post by id
    * @param id Post id
    * @returns A post with the id
@@ -53,12 +68,14 @@ export class PostService {
    */
   public editPost(post: Post): Observable<Post> {
     const { _id } = post;
-    return this.httpClient.patch<Post>(
+    return this.httpClient.put<Post>(
       `${environment.apiUrl}/posts/${_id}`,
       post,
+
       {
         headers: {
           'Content-Type': 'application/json',
+          'x-auth-token': this.authService.getToken(),
         },
       }
     );
@@ -70,6 +87,10 @@ export class PostService {
    * @returns Success object
    */
   public deletePost(id: string): Observable<any> {
-    return this.httpClient.delete<any>(`${environment.apiUrl}/posts/${id}`);
+    return this.httpClient.delete<any>(`${environment.apiUrl}/posts/${id}`, {
+      headers: {
+        'x-auth-token': this.authService.getToken(),
+      },
+    });
   }
 }

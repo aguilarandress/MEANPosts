@@ -10,6 +10,7 @@ import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -19,6 +20,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
   { path: 'posts', component: PostsComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'posts/add',
     component: AddPostComponent,

@@ -1,0 +1,11 @@
+<h3><i class="fa fa-cog"></i> Dashboard</h3>
+<div class="row">
+  <div class="col-md-9">
+    <app-posts-table [posts]="this.posts"></app-posts-table>
+  </div>
+  <div class="col-md-3">
+    <a routerLink="/posts/add" class="btn btn-block btn-success"
+      ><i class="fa fa-plus"></i> Add new post</a
+    >
+  </div>
+</div>
