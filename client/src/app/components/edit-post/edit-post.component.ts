@@ -16,20 +16,6 @@ export class EditPostComponent implements OnInit {
     title: '',
     body: '',
   };
-  public options = {
-    charCounterCount: true,
-    emoticonsButtons: ['emoticonsBack', '|'],
-    fontFamily: {
-      'Arial,Helvetica,sans-serif': 'Arial',
-      'Georgia,serif': 'Georgia',
-      'Impact,Charcoal,sans-serif': 'Impact',
-      'Tahoma,Geneva,sans-serif': 'Tahoma',
-      'Times New Roman,Times,serif': 'Times New Roman',
-      'Verdana,Geneva,sans-serif': 'Verdana',
-    },
-    fontSizeSelection: true,
-    language: 'es',
-  };
 
   constructor(
     private routerService: Router,
@@ -41,6 +27,7 @@ export class EditPostComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: any) => {
       const { id } = params;
+      // Get post
       this.postService.getPostById(id).subscribe((post: Post) => {
         this.post = post;
       });

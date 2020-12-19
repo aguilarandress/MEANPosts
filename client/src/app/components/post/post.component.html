@@ -1,5 +1,12 @@
 <h3>{{ post.title }}</h3>
-<p>Created by: {{ post.user.username }}</p>
-<p>Publish date: {{ post.date | date }}</p>
+<hr />
+<p>
+  <small><i class="fa fa-user"></i> Written by {{ post.user.username }}</small>
+  <br />
+  <small
+    ><i class="fa fa-calendar"></i> Published on {{ post.date | date }}</small
+  >
+</p>
 
-<div [innerHTML]="post.body"></div>
+<hr />
+<div style="overflow-wrap: break-word" [innerHTML]="post.body"></div>

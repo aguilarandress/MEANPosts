@@ -14,9 +14,7 @@
   </div>
   <div class="form-group">
     <label for="body">Post Body:</label>
-    <div [froalaEditor]="options" [(froalaModel)]="post.body">
-      Your body here
-    </div>
+    <ckeditor name="body" [(ngModel)]="post.body"></ckeditor>
   </div>
   <button type="submit" class="btn btn-warning btn-block mb-4">
     <i class="fa fa-pen"></i> Edit post

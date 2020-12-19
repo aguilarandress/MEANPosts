@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -19,14 +20,12 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { PostsTableComponent } from './components/posts-table/posts-table.component';
 
 import { AuthGuard } from './guards/auth.guard';
 import { PostService } from './services/post.service';
 import { UsersService } from './services/users.service';
 import { AuthService } from './services/auth.service';
-import { PostsTableComponent } from './components/posts-table/posts-table.component';
 
 @NgModule({
   declarations: [
@@ -51,9 +50,8 @@ import { PostsTableComponent } from './components/posts-table/posts-table.compon
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot(),
     FlashMessagesModule.forRoot(),
+    CKEditorModule,
   ],
   providers: [PostService, AuthService, UsersService, AuthGuard],
   bootstrap: [AppComponent],
