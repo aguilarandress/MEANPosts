@@ -20,6 +20,8 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
 import { AuthGuard } from './guards/auth.guard';
 import { PostService } from './services/post.service';
 import { UsersService } from './services/users.service';
@@ -49,6 +51,8 @@ import { PostsTableComponent } from './components/posts-table/posts-table.compon
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
     FlashMessagesModule.forRoot(),
   ],
   providers: [PostService, AuthService, UsersService, AuthGuard],

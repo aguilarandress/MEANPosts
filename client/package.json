@@ -21,6 +21,7 @@
     "@angular/router": "~10.1.5",
     "@auth0/angular-jwt": "^5.0.1",
     "@fortawesome/fontawesome-free": "^5.15.1",
+    "angular-froala-wysiwyg": "^3.2.5",
     "angular2-flash-messages": "^3.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

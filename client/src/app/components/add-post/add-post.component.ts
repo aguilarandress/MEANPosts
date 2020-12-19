@@ -17,6 +17,21 @@ export class AddPostComponent implements OnInit {
     body: '',
   };
 
+  public options = {
+    charCounterCount: true,
+    emoticonsButtons: ['emoticonsBack', '|'],
+    fontFamily: {
+      'Arial,Helvetica,sans-serif': 'Arial',
+      'Georgia,serif': 'Georgia',
+      'Impact,Charcoal,sans-serif': 'Impact',
+      'Tahoma,Geneva,sans-serif': 'Tahoma',
+      'Times New Roman,Times,serif': 'Times New Roman',
+      'Verdana,Geneva,sans-serif': 'Verdana',
+    },
+    fontSizeSelection: true,
+    language: 'es',
+  };
+
   constructor(
     private flashMessageService: FlashMessagesService,
     private postService: PostService,

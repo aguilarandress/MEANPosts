@@ -25,10 +25,15 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "./node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "./node_modules/froala-editor/css/froala_editor.pkgd.min.css",
               "src/bootswatch.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/froala-editor/js/froala_editor.pkgd.min.js",
+              "./node_modules/froala-editor/js/plugins/font_family.min.js",
+              "./node_modules/froala-editor/js/plugins/font_size.min.js"
+            ]
           },
           "configurations": {
             "production": {

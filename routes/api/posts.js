@@ -28,6 +28,23 @@ router.get('/', async (req, res) => {
   }
 });
 
+// @route   GET - /api/posts/user/:userId
+// @desc    Gets all the posts of a user
+// @access  private
+router.get('/user/:userId', isAuthenticated, async (req, res) => {
+  try {
+    const { userId } = req.params;
+    // Get posts
+    const posts = await PostModel.find({ user: userId }).sort({ date: -1 });
+    res.json(posts);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ success: false, message: 'Internal server error...' });
+  }
+});
+
 // @route   GET - /api/posts/:id
 // @desc    Fetches a single post
 // @access  public
