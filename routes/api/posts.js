@@ -52,7 +52,12 @@ router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     // Find post by id
-    const post = await PostModel.findById(id).populate('user');
+    const post = await PostModel.findById(id)
+      .populate({
+        path: 'user',
+        select: 'username',
+      })
+      .populate({ path: 'comments.user', select: 'username' });
     return res.json(post);
   } catch (err) {
     console.error(err);
@@ -149,6 +154,42 @@ router.put(
       await updatedPost.save();
       return res.json(updatedPost);
     } catch (err) {
+      console.error(err);
+      res
+        .status(500)
+        .json({ success: false, message: 'Internal server error...' });
+    }
+  }
+);
+
+// @route   POST - /api/posts/:id/comments
+// @desc    Adds a new comment to post
+// @access  private
+router.post(
+  '/:id/comments',
+  [body('comment').isString().withMessage('Please enter a valid comment')],
+  isAuthenticated,
+  async (req, res) => {
+    // Get errors
+    const errors = validationResult(req);
+    // Check for errors
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    try {
+      // Get commented post
+      const { id } = req.params;
+      const commentedPost = await PostModel.findById(id);
+      if (!commentedPost) {
+        res.status(404).json({ success: false, message: 'Post not found' });
+      }
+      const userId = req.user._id;
+      const { comment } = req.body;
+      // Vreate comment
+      commentedPost.comments.push({ text: comment, user: userId });
+      commentedPost.save();
+      res.json(commentedPost);
+    } catch (error) {
       console.error(err);
       res
         .status(500)
