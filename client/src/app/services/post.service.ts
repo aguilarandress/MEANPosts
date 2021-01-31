@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 
 import Post from '../models/Post';
+import Comment from '../models/Comment';
 
 @Injectable({
   providedIn: 'root',
@@ -59,6 +60,24 @@ export class PostService {
         'x-auth-token': this.authService.getToken(),
       },
     });
+  }
+
+  /**
+   * Adds a new comment
+   * @param postId The post id
+   * @param newComment The new comment
+   */
+  public addComment(postId: string, comment: string): Observable<Post> {
+    return this.httpClient.post<Post>(
+      `${environment.apiUrl}/posts/${postId}/comments`,
+      { comment },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': this.authService.getToken(),
+        },
+      }
+    );
   }
 
   /**

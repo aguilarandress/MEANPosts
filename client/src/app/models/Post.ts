@@ -1,4 +1,5 @@
 import User from './User';
+import Comment from './Comment';
 
 interface Post {
   _id: string;
@@ -6,6 +7,7 @@ interface Post {
   body?: string;
   user?: User;
   date?: string;
+  comments?: Comment[];
 }
 
 export default Post;

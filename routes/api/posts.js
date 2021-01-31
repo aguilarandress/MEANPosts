@@ -186,7 +186,7 @@ router.post(
       const userId = req.user._id;
       const { comment } = req.body;
       // Vreate comment
-      commentedPost.comments.push({ text: comment, user: userId });
+      commentedPost.comments.unshift({ text: comment, user: userId });
       commentedPost.save();
       res.json(commentedPost);
     } catch (error) {

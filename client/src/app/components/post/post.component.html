@@ -10,3 +10,32 @@
 
 <hr />
 <div style="overflow-wrap: break-word" [innerHTML]="post.body"></div>
+<hr />
+
+<!-- Recent comments -->
+<h5 class="mb-4">Recent comments</h5>
+<div class="card card-body bg-light mb-2">
+  <form (ngSubmit)="onCommentSubmit()" #commentForm="ngForm">
+    <div class="form-group">
+      <input
+        type="text"
+        placeholder="Add a comment..."
+        name="text"
+        #text="ngModel"
+        [(ngModel)]="comment.text"
+        class="form-control"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">
+      <i class="fa fa-plus"></i> Submit
+    </button>
+  </form>
+</div>
+<div *ngFor="let comment of post.comments">
+  <p>
+    <strong>{{ comment.user.username + " " }}</strong>
+    <small>{{ comment.date | date }}</small>
+  </p>
+  <p>{{ comment.text }}</p>
+  <hr />
+</div>
